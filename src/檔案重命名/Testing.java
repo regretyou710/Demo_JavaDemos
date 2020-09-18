@@ -15,10 +15,12 @@ public class Testing {
 
 			String path = "";
 			String fileName = "";
+			String number = "";
 			outer: try {
 				System.out.print("請選擇(0-2):");
 				Scanner sc = new Scanner(System.in);
 				String choice = sc.nextLine().trim();
+				
 				switch (choice) {
 				case "2":
 					final String os = System.getProperty("os.name");
@@ -44,17 +46,23 @@ public class Testing {
 						}
 					} while (fileName.equals(""));
 
-					FileUtil.fileRename(path, fileName);
+					do {
+						System.out.print("請輸入序列號:");
+						number = sc.nextLine().trim();
+						if (number.equals("")) {
+							System.out.println("序列號不得為空");
+						}
+					} while (number.equals(""));
+					
+					FileUtil.fileRename(path, fileName, Integer.parseInt(number));
 					Thread.sleep(1000);
 					break;
-
 				case "0":
 					System.out.println("結束程式..");
 					return;
 				default:
 					break;
 				}
-
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				break outer;
