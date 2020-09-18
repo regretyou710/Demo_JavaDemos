@@ -16,6 +16,7 @@ public class FileUtil {
 
 	}
 
+	// 重命名
 	public static void fileRename(String path, String fileName, int num) throws IOException {
 		// 檔案路徑
 		Path pathStr = Paths.get(path);
@@ -56,6 +57,65 @@ public class FileUtil {
 				throw new RuntimeException("資料夾中沒有檔案");
 			}
 		}
+	}
+
+	// 原名稱異動
+	public static void fileNameModify(String path, int startIndex, String insertString) throws IOException {
+		// 檔案路徑
+		Path pathStr = Paths.get(path);
+
+		// 判斷檔案路徑是否存在
+		if (Files.notExists(pathStr)) {
+			throw new RuntimeException("路徑不存在");
+		} else {
+			// 使用Stream流將路徑底下的file進行轉換及排序
+			list = Files.list(pathStr);
+			List<File> fileList = list.map(p -> p.toFile())
+					.sorted((p1, p2) -> Long.compare(p1.lastModified(), p2.lastModified()))
+					.collect(Collectors.toList());
+
+			if (fileList.size() != 0 && fileList != null) {
+				boolean renameTo = false;
+				String originStr = "";
+
+				for (int i = 0; i < fileList.size(); i++) {
+					StringBuffer sb = null;
+					String newStr = "";
+
+					if (fileList.get(i).getName().lastIndexOf(".") == -1) {
+						// 對directory名稱異動
+						originStr = fileList.get(i).getName();
+						sb = new StringBuffer(originStr);
+						sb.insert(startIndex, insertString);
+						newStr = sb.toString();
+						renameTo = fileList.get(i).renameTo(new File(path + "\\" + newStr));
+
+					} else {
+						// 對file名稱異動
+						originStr = fileList.get(i).getName().substring(0, fileList.get(i).getName().lastIndexOf("."));
+						sb = new StringBuffer(originStr);
+						sb.insert(startIndex, insertString);
+						newStr = sb.toString();
+
+						renameTo = fileList.get(i)
+								.renameTo(new File(path + "\\" + newStr
+										+ fileList.get(i).getName().substring(
+												fileList.get(i).getName().lastIndexOf("."),
+												fileList.get(i).getName().length())));
+					}
+
+					if (renameTo) {
+						System.out.println(originStr + "重命名成功");
+					} else {
+						System.out.println(originStr + "重命名失敗");
+					}
+				}
+			} else {
+				throw new RuntimeException("資料夾中沒有檔案");
+			}
+
+		}
+
 	}
 
 	// 用來關閉Stream流
