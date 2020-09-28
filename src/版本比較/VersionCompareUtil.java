@@ -39,7 +39,7 @@ public class VersionCompareUtil {
 		for (int i = 0; i < baseLen; i++) {
 
 			if (v1[i].equals(v2[i])) {
-				// 新舊版本的基礎版本相同就跳過
+				// 逐一比較新舊的每一位基礎版本，相同就跳過
 				continue;
 			} else {
 				// 基礎版本號比較
