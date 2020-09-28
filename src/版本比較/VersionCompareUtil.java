@@ -7,6 +7,8 @@ public class VersionCompareUtil {
 	};
 
 	/*
+	 * 比較版本大小
+	 * 
 	 * @param version1 版本1
 	 * 
 	 * @param version1 版本2
