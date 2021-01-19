@@ -2,7 +2,7 @@ package 版本比較;
 
 import java.util.Scanner;
 
-public class Testing {
+public class 版本比較Testing {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("v1:");

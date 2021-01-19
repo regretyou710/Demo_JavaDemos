@@ -2,7 +2,7 @@ package 樂透;
 
 import java.util.Random;
 
-public class Testing {
+public class 樂透Testing {
 
 	public static void main(String[] args) {
 		Ball[] box = new Ball[49];

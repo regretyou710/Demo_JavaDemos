@@ -2,7 +2,7 @@ package 檔案重命名;
 
 import java.util.Scanner;
 
-public class Testing {
+public class 檔案重命名Testing {
 
 	public static void main(String[] args) {
 
