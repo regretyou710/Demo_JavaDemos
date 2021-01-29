@@ -1,9 +1,11 @@
-package 版本比較;
+package VersionCompare;
 
-import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.SQLException;
 
-public class VersionCompareUtil {
-	private VersionCompareUtil() {
+public class VersionCompareUtilImpl implements IVersionCompareUtil {
+
+	public VersionCompareUtilImpl() {
 	};
 
 	/*
@@ -11,7 +13,7 @@ public class VersionCompareUtil {
 	 * 
 	 * @param version1 版本1
 	 * 
-	 * @param version1 版本2
+	 * @param version2 版本2
 	 * 
 	 * @return 0:相同
 	 * 
@@ -19,7 +21,8 @@ public class VersionCompareUtil {
 	 * 
 	 * @return -1:version1小於version2
 	 */
-	public static int compareVersion(String version1, String version2) {
+	@Override
+	public int compareVersion(String version1, String version2) {
 		// 情況一:新舊版本相同且長度相同
 		if (version1.equals(version2)) {
 			// 版本相同
@@ -58,4 +61,15 @@ public class VersionCompareUtil {
 			return 0;
 		}
 	}
+
+	@Override
+	public String getVerNumQuery(Connection conn, String sqlStr) throws SQLException {
+		return null;
+	}
+
+	@Override
+	public void addVerNum(Connection conn, String sqlStr, String verNumber) throws SQLException {
+
+	}
+
 }
